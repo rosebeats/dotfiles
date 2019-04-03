@@ -52,6 +52,10 @@ Plug 'ludovicchabant/vim-gutentags' " automatic ctags generation
 Plug 'majutsushi/tagbar' " class outline
 call plug#end()
 
+let g:ale_linters = {
+\    'cpp': [],
+\}
+
 " root marker for project
 let g:ctrlp_root_markers = ['.vroot']
 
@@ -78,11 +82,22 @@ let g:EclimTempFilesEnable=0
 " Misc costom settings
 set nowrap
 set number
+setg relativenumber
 set ignorecase
 set autoindent
 
+" Toggle relative line numbering
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
+endfunc
+
 " Leader key
 let mapleader = "\<Space>"
+nnoremap <Leader>nt :call NumberToggle()<CR>
 nnoremap <Leader>0 ^
 nnoremap <Leader>s :sp<CR>
 nnoremap <Leader>v :vsplit<CR>
