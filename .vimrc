@@ -1,3 +1,8 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 " An example for a vimrc file.
 "
@@ -31,7 +36,7 @@ Plug 'scrooloose/nerdtree' " File explorer
 Plug 'Xuyuanp/nerdtree-git-plugin' " passive nerdtree git extension
 Plug 'honza/vim-snippets' " passive
 Plug 'Yggdroot/indentLine' " passive
-Plug 'Valloric/YouCompleteMe' " complete from omnibar, use tab to scroll
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } " complete from omnibar, use tab to scroll
 Plug 'tpope/vim-repeat' " passive
 Plug 'dahu/vim-fanfingtastic' " passive, f,F,t,T,etc. wrap lines
 Plug 'embear/vim-localvimrc' " passive
@@ -40,7 +45,7 @@ Plug 'pangloss/vim-javascript' " passive
 Plug 'mxw/vim-jsx' " passive
 Plug 'alvan/vim-closetag' " passive close html tags
 Plug 'Valloric/MatchTagAlways' " passive match tags
-Plug 'jiangmiao/auto-pairs' "passive match brackets, parens, quotes
+Plug 'jiangmiao/auto-pairs' " passive match brackets, parens, quotes
 Plug 'christoomey/vim-tmux-navigator' " passive allow for tmux navigating like vim
 Plug 'ryanoasis/vim-devicons' " passive icons
 Plug 'airblade/vim-gitgutter' " passive adds a git diff gutter
@@ -50,11 +55,24 @@ Plug 'tpope/vim-surround' " surround stuff with cs
 Plug 'vim-airline/vim-airline' " bottom status line
 Plug 'ludovicchabant/vim-gutentags' " automatic ctags generation
 Plug 'majutsushi/tagbar' " class outline
+Plug 'semanser/vim-outdated-plugins' " passive, checks for plugin updates
+Plug 'AndrewRadev/splitjoin.vim' " gS split blocks into multiline statements or gJ join into single line
+Plug 'rust-lang/rust.vim' " passive, rust integration
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': './install.sh'
+    \ }
+Plug 'godlygeek/tabular' " align stuff :Tabularize
+Plug 'itchyny/vim-haskell-indent' " passive, auto indent haskell
+" Plug 'eagletmt/ghcmod-vim'
+" Plug 'Shougo/vimproc'
 call plug#end()
 
+let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
 \    'cpp': [],
 \}
+let g:ale_python_auto_pipenv=1
 
 " root marker for project
 let g:ctrlp_root_markers = ['.vroot']
@@ -108,6 +126,8 @@ nnoremap <Leader>l <C-w><C-p>
 nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bp :bp<CR>
 nnoremap <Leader>bq :lclose<bar>b#<bar>bd #<CR>
+noremap <Leader><Bar> :Tabularize /
+noremap <Leader><Bar>= :Tabularize / \zs=\ze <CR>
 noremap <C-j> <C-w>j
 noremap <C-h> <C-w>h
 noremap <C-k> <C-w>k
@@ -159,7 +179,7 @@ let g:localvimrc_persistent = 1
 
 " Backup
 set backup
-set backupdir=~/.vim/tmp
+set backupdir=/tmp
 set directory=~/.vim/swp
 
 " Tab delineation
