@@ -28,15 +28,15 @@ filetype off
 call plug#begin()
 Plug 'kien/ctrlp.vim' " use: ctrl-p [search] search files, ctrl-jk nav, ctrl-t open tab
 Plug 'fholgado/minibufexpl.vim' " buffer explorer
-Plug 'scrooloose/syntastic' " passive syntax linter
+" Plug 'scrooloose/syntastic' " passive syntax linter
 Plug 'w0rp/ale' " passive syntax linter
 Plug 'easymotion/vim-easymotion' " use: <Leader>[motion] use motion to go to
-Plug 'SirVer/ultisnips' " use: <C-Space> to expand and next, <C-h> back
 Plug 'scrooloose/nerdtree' " File explorer
 Plug 'Xuyuanp/nerdtree-git-plugin' " passive nerdtree git extension
 Plug 'honza/vim-snippets' " passive
 Plug 'Yggdroot/indentLine' " passive
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } " complete from omnibar, use tab to scroll
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer --rust-completer --java-completer --clangd-completer' } " complete from omnibar, use tab to scroll
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Autocompletion
 Plug 'tpope/vim-repeat' " passive
 Plug 'dahu/vim-fanfingtastic' " passive, f,F,t,T,etc. wrap lines
 Plug 'embear/vim-localvimrc' " passive
@@ -55,7 +55,7 @@ Plug 'tpope/vim-surround' " surround stuff with cs
 Plug 'vim-airline/vim-airline' " bottom status line
 Plug 'ludovicchabant/vim-gutentags' " automatic ctags generation
 Plug 'majutsushi/tagbar' " class outline
-Plug 'semanser/vim-outdated-plugins' " passive, checks for plugin updates
+Plug 'rosebeats/vim-outdated-plugins' " passive, checks for plugin updates
 Plug 'AndrewRadev/splitjoin.vim' " gS split blocks into multiline statements or gJ join into single line
 Plug 'rust-lang/rust.vim' " passive, rust integration
 Plug 'autozimu/LanguageClient-neovim', {
@@ -64,18 +64,25 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'godlygeek/tabular' " align stuff :Tabularize
 Plug 'itchyny/vim-haskell-indent' " passive, auto indent haskell
+Plug 'OmniSharp/omnisharp-vim' " passive, C# IDE
 " Plug 'eagletmt/ghcmod-vim'
 " Plug 'Shougo/vimproc'
 call plug#end()
 
+let g:outdated_plugins_silent_mode=1
+
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
 \    'cpp': [],
+\    'cs': ['OmniSharp']
 \}
 let g:ale_python_auto_pipenv=1
 
 " root marker for project
 let g:ctrlp_root_markers = ['.vroot']
+
+" omnisharp async server
+let g:OmniSharp_server_stdio = 1
 
 " nerdtree
 autocmd StdinReadPre * let s:std_in=1
@@ -87,12 +94,6 @@ let NERDTreeShowHidden = 1
 
 " closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js'
-
-" snippets
-let g:UltiSnipsExpandTrigger="<C-Space>"
-let g:UltiSnipsJumpForwardTrigger="<C-Space>"
-let g:UltiSnipsJumpBackwardTrigger="<C-h>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " Eclim settings
 let g:EclimTempFilesEnable=0
@@ -167,7 +168,6 @@ set expandtab
 " Enter
 nnoremap <S-Enter> O<Esc>
 nnoremap <Enter> o<Esc>
-inoremap <CR> <CR>x<BS>
 nnoremap o ox<BS>
 nnoremap O Ox<BS>
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
@@ -233,7 +233,7 @@ if has("autocmd")
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
+  filetype indent plugin on
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
@@ -270,3 +270,45 @@ endif
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee % > /dev/null
+
+" Start coc config
+set hidden
+
+set nobackup
+set nowritebackup
+
+set cmdheight=2
+
+set updatetime=300
+
+set shortmess+=c
+
+set signcolumn=yes
+
+" tab completion
+inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
+" C-space completion
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" CR confirmation
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" goto keys
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" status line support
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" end coc config
