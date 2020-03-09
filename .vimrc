@@ -101,7 +101,7 @@ let g:EclimTempFilesEnable=0
 " Misc costom settings
 set nowrap
 set number
-setg relativenumber
+set relativenumber
 set ignorecase
 set autoindent
 
