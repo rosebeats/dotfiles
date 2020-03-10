@@ -220,8 +220,8 @@ bindsym Print		exec flameshot full -p $HOME/Pictures/screenshots
 bindsym Shift+Print	exec flameshot gui
 
 # lockscreen
-bindsym $mod+Control+l exec --no-startup-id i3lock
-exec --no-startup-id xautolock -time 10 -locker i3lock &
+bindsym $mod+Control+l exec --no-startup-id i3lock-fancy
+exec --no-startup-id xautolock -time 10 -locker i3lock-fancy &
 
 # picom compositor
 exec --no-startup-id picom -f &
