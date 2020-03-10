@@ -1,0 +1,3 @@
+[submodule ".config/polybar/polybar-scripts"]
+	path = .config/polybar/polybar-scripts
+	url = git@github.com:rosebeats/polybar-scripts.git
