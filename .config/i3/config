@@ -187,10 +187,10 @@ mode "open" {
 bindsym $mod+o mode "open"
 
 mode "power" {
-        bindsym p systemctl poweroff
-        bindsym r systemctl reboot
-        bindsym o i3-msg exit
-        bindsym l loginctl lock
+        bindsym p exec systemctl poweroff; mode "default"
+        bindsym r exec systemctl reboot; mode "default"
+        bindsym e exit; mode "default"
+        bindsym l exec loginctl lock-session; mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+p mode "default"
