@@ -176,14 +176,27 @@ bindsym $mod+r mode "resize"
 
 mode "open" {
         bindsym w exec chromium; mode "default"
-	bindsym f exec pcmanfm; mode "default"
-	bindsym u exec unityhub; mode "default"
+        bindsym f exec pcmanfm; mode "default"
+        bindsym u exec unityhub; mode "default"
+        bindsym g exec steam; mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+o mode "default"
 }
 
 bindsym $mod+o mode "open"
+
+mode "power" {
+        bindsym p systemctl poweroff
+        bindsym r systemctl reboot
+        bindsym o i3-msg exit
+        bindsym l loginctl lock
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+p mode "default"
+}
+
+bindsym $mod+p mode "power"
 
 set $bg-color			#404552
 set $inactive-bg-color		#383c4a
@@ -220,8 +233,8 @@ bindsym Print		exec flameshot full -p $HOME/Pictures/screenshots
 bindsym Shift+Print	exec flameshot gui
 
 # lockscreen
-bindsym $mod+Control+l exec --no-startup-id i3lock-fancy
-exec --no-startup-id xautolock -time 10 -locker i3lock-fancy &
+exec --no-startup-id xset s 900
+exec --no-startup-id light-locker &
 
 # picom compositor
 exec --no-startup-id picom -f &
@@ -248,3 +261,16 @@ bindsym $mod+grave exec i3-sensible-terminal -e nvim ~/.config/i3/config
 for_window [class=".*"] border pixel 0
 
 gaps inner 10
+
+# https://github.com/ValveSoftware/steam-for-linux/issues/1040
+for_window [class="^Steam$" title="^Friends List$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [class="^Steam$" title="PayPal"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
