@@ -5,7 +5,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # Preferred theme for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
+if [[ -n $SSH_CONNECTION ]] || [[ `tput colors` != "256" ]]; then
     ZSH_THEME="af-magic"
 else
     ZSH_THEME="powerlevel10k/powerlevel10k"
