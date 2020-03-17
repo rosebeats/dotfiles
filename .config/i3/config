@@ -134,6 +134,8 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
+bindsym $mod+n exec ~/.config/i3/renameWorkspace.sh
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -185,6 +187,7 @@ mode "open" {
         bindsym f exec pcmanfm; mode "default"
         bindsym u exec unityhub; mode "default"
         bindsym g exec steam; mode "default"
+        bindsym z exec zoom; mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+o mode "default"
@@ -193,10 +196,10 @@ mode "open" {
 bindsym $mod+o mode "open"
 
 mode "power" {
-        bindsym p exec systemctl poweroff; mode "default"
-        bindsym r exec systemctl reboot; mode "default"
+        bindsym p exec --no-startup-id systemctl poweroff; mode "default"
+        bindsym r exec --no-startup-id systemctl reboot; mode "default"
         bindsym e exit; mode "default"
-        bindsym l exec loginctl lock-session; mode "default"
+        bindsym l exec --no-startup-id loginctl lock-session; mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+p mode "default"
