@@ -16,9 +16,6 @@ endif
 "	    for OpenVMS:  sys$login:.vimrc
 
 " When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -67,6 +64,7 @@ Plug 'itchyny/vim-haskell-indent' " passive, auto indent haskell
 Plug 'OmniSharp/omnisharp-vim' " passive, C# IDE
 " Plug 'eagletmt/ghcmod-vim'
 " Plug 'Shougo/vimproc'
+Plug 'ap/vim-css-color' " passive, css colors
 call plug#end()
 
 let g:outdated_plugins_silent_mode=1

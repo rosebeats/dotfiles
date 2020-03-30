@@ -165,3 +165,6 @@ if [ -n "$DESKTOP_SESSION" ];then
     eval $(gnome-keyring-daemon --start)
     export SSH_AUTH_SOCK
 fi
+
+alias cv="cd ~/Documents/school/College\ senior/compvis/"
+alias sp="cd ~/coding/SeniorProject/UnityProject/GayRoguelike/Assets"

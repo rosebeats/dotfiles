@@ -227,7 +227,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
 label = %percentage%%
@@ -236,7 +236,7 @@ thermal-zone = 3
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "MEM "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
@@ -451,6 +451,7 @@ label-font = 5
 type = custom/script
 exec = ~/.config/polybar/polybar-scripts/polybar-scripts/system-nvidia-smi/system-nvidia-smi.sh
 interval = 2
+format-underline = #4bffdc
 
 [module/system-usb-mount]
 type = custom/script
