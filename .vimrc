@@ -65,9 +65,21 @@ Plug 'OmniSharp/omnisharp-vim' " passive, C# IDE
 " Plug 'eagletmt/ghcmod-vim'
 " Plug 'Shougo/vimproc'
 Plug 'ap/vim-css-color' " passive, css colors
+Plug 'NLKNguyen/papercolor-theme' " passive theme
 call plug#end()
 
 let g:outdated_plugins_silent_mode=1
+
+" theme settings
+set t_Co=256
+colorscheme PaperColor
+let g:PaperColor_Theme_Options = {
+\    'theme': {
+\        'default.dark': {
+\            'transparent_background': 1
+\        }
+\    }
+\}
 
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {

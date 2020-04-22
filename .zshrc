@@ -168,3 +168,4 @@ fi
 
 alias cv="cd ~/Documents/school/College\ senior/compvis/"
 alias sp="cd ~/coding/SeniorProject/UnityProject/GayRoguelike/Assets"
+alias gm="cd ~/coding/EnderShooter"
