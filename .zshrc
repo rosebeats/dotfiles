@@ -167,5 +167,5 @@ if [ -n "$DESKTOP_SESSION" ];then
 fi
 
 alias cv="cd ~/Documents/school/College\ senior/compvis/"
-alias sp="cd ~/coding/SeniorProject/UnityProject/GayRoguelike/Assets"
+alias sp="cd ~/coding/SeniorProject/UnityProject/RainbowRogue/Assets"
 alias gm="cd ~/coding/EnderShooter"
