@@ -1,0 +1,9 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = *
+
+[Action]
+Description = update the polybar script
+When = PostTransaction
+Exec = /bin/sh -c "pkill -f -USR1 updates-arch-combined.sh"
